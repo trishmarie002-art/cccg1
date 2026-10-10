@@ -1,0 +1,8 @@
+{
+  "name": "Coast to Coast Construction Group",
+  "description": "Clearwater’s family-owned general contractor for new construction, remodeling, roofing, and custom pools.",
+  "permissions": [],
+  "capabilities": [
+    "MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"
+  ]
+}
