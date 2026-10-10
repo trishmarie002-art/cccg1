@@ -80,7 +80,7 @@ const ensureEstimateModal = () => {
               <option value="Decks & Additions">Decks & Additions</option>
               <option value="Commercial Construction">Commercial Construction</option>
               <option value="New Construction">New Construction</option>
-              <option value="Other">Other Construction Work</option>
+              <option value="Storm Drainage">Storm Drainage</option><option value="Other">Other Construction Work</option>
             </select>
           </label>
           <label class="wide">Preferred Contact Method
@@ -193,6 +193,7 @@ document.addEventListener('click', (e) => {
     else if (text.includes('kitchen')) serviceHint = 'Kitchen';
     else if (text.includes('bath')) serviceHint = 'Bathroom';
     else if (text.includes('roof')) serviceHint = 'Roofing';
+    else if (text.includes('drain')) serviceHint = 'Storm Drainage';
     openEstimateModal(serviceHint);
   }
 });
