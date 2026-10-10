@@ -198,3 +198,39 @@ document.addEventListener('click', (e) => {
   }
 });
 
+
+/* Site-wide mobile contact bar and progressive scroll reveals */
+(() => {
+  const bar = document.createElement('div');
+  bar.className = 'mobile-contact-bar';
+  bar.setAttribute('role', 'group');
+  bar.setAttribute('aria-label', 'Contact Coast to Coast');
+  bar.innerHTML = '<a class="contact-call" href="tel:+17279227630" aria-label="Call Coast to Coast at (727) 922-7630"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M7 3H4a1 1 0 0 0-1 1c0 9.4 7.6 17 17 17a1 1 0 0 0 1-1v-3l-5-2-2 2a15 15 0 0 1-7-7l2-2-2-5Z"/></svg>Call Us</a><a class="contact-text" href="sms:+17279227630" aria-label="Text Coast to Coast at (727) 922-7630"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 4h16v12H9l-5 4V4Z"/><path d="M8 8h8M8 12h5"/></svg>Text Us</a>';
+  document.body.appendChild(bar);
+  const motion = window.matchMedia('(prefers-reduced-motion: reduce)');
+  if (motion.matches || !('IntersectionObserver' in window)) return;
+  const elements = document.querySelectorAll('main .section-head, main .three > article, main .split, main .mission, main .project-grid > .project, main .review-screenshot, main .faq-list, main .area, main .home-contact-grid > *, main .cta');
+  const observer = new IntersectionObserver(entries => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        entry.target.classList.add('is-visible');
+        observer.unobserve(entry.target);
+      }
+    });
+  }, {threshold: 0, rootMargin: '0px 0px -24px 0px'});
+  elements.forEach(element => {
+    if (element.getBoundingClientRect().top < window.innerHeight) return;
+    element.classList.add('scroll-reveal');
+    observer.observe(element);
+    element.addEventListener('focusin', () => {
+      element.classList.add('is-visible');
+      observer.unobserve(element);
+    });
+  });
+  motion.addEventListener('change', event => {
+    if (event.matches) {
+      elements.forEach(element => element.classList.add('is-visible'));
+      observer.disconnect();
+    }
+  });
+})();
