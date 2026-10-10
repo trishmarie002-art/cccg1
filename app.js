@@ -42,6 +42,27 @@ document.querySelector('#estimate-form')?.addEventListener('submit',e=>{e.preven
   updateParallax();
 })();
 
+// Ensure hero background video autoplay
+(() => {
+  const video = document.querySelector('.hero-video');
+  if (!video) return;
+  video.muted = true;
+  const playPromise = video.play();
+  if (playPromise !== undefined) {
+    playPromise.catch(() => {
+      const playOnInteract = () => {
+        video.play().catch(() => {});
+        window.removeEventListener('touchstart', playOnInteract);
+        window.removeEventListener('click', playOnInteract);
+        window.removeEventListener('scroll', playOnInteract);
+      };
+      window.addEventListener('touchstart', playOnInteract, { passive: true });
+      window.addEventListener('click', playOnInteract);
+      window.addEventListener('scroll', playOnInteract, { passive: true });
+    });
+  }
+})();
+
 // Free Estimate Contact Form Modal
 const ensureEstimateModal = () => {
   let modal = document.getElementById('estimate-modal');
