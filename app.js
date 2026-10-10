@@ -42,16 +42,31 @@ document.querySelector('#estimate-form')?.addEventListener('submit',e=>{e.preven
   updateParallax();
 })();
 
-// Ensure hero background video autoplay
+// Ensure hero background video autoplay and optimized playback speed
 (() => {
   const video = document.querySelector('.hero-video');
   if (!video) return;
   video.muted = true;
+  const SPEED = 1.35;
+  video.defaultPlaybackRate = SPEED;
+  video.playbackRate = SPEED;
+
+  const enforceSpeed = () => {
+    try {
+      video.playbackRate = SPEED;
+    } catch (_) {}
+  };
+
+  video.addEventListener('loadedmetadata', enforceSpeed);
+  video.addEventListener('canplay', enforceSpeed);
+  video.addEventListener('play', enforceSpeed);
+
   const playPromise = video.play();
   if (playPromise !== undefined) {
-    playPromise.catch(() => {
+    playPromise.then(enforceSpeed).catch(() => {
       const playOnInteract = () => {
-        video.play().catch(() => {});
+        enforceSpeed();
+        video.play().then(enforceSpeed).catch(() => {});
         window.removeEventListener('touchstart', playOnInteract);
         window.removeEventListener('click', playOnInteract);
         window.removeEventListener('scroll', playOnInteract);
