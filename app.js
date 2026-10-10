@@ -78,6 +78,129 @@ document.querySelector('#estimate-form')?.addEventListener('submit',e=>{e.preven
   }
 })();
 
+// Magic golden particle stardust effect for hero
+(() => {
+  if (window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+  const canvas = document.querySelector('.hero-magic-canvas');
+  const hero = document.querySelector('.home-hero');
+  if (!canvas || !hero) return;
+
+  const ctx = canvas.getContext('2d');
+  if (!ctx) return;
+
+  let width = (canvas.width = hero.offsetWidth);
+  let height = (canvas.height = hero.offsetHeight);
+
+  const resize = () => {
+    if (!hero) return;
+    width = canvas.width = hero.offsetWidth;
+    height = canvas.height = hero.offsetHeight;
+  };
+  window.addEventListener('resize', resize, { passive: true });
+
+  const colors = [
+    'rgba(217, 166, 46, ',
+    'rgba(255, 230, 140, ',
+    'rgba(255, 255, 255, ',
+    'rgba(230, 193, 107, '
+  ];
+
+  class MagicParticle {
+    constructor(x, y, isBurst = false) {
+      this.reset(x, y, isBurst);
+    }
+    reset(x, y, isBurst = false) {
+      this.x = x !== undefined ? x : Math.random() * width;
+      this.y = y !== undefined ? y : Math.random() * height;
+      this.size = Math.random() * 2.2 + 0.8;
+      this.isSparkle = Math.random() < 0.3;
+      this.speedY = isBurst ? (Math.random() * -1.8 - 0.4) : (Math.random() * -0.6 - 0.25);
+      this.speedX = isBurst ? ((Math.random() - 0.5) * 1.6) : ((Math.random() - 0.5) * 0.4);
+      this.colorBase = colors[Math.floor(Math.random() * colors.length)];
+      this.alpha = isBurst ? 1 : Math.random() * 0.7 + 0.2;
+      this.fadeSpeed = isBurst ? (Math.random() * 0.02 + 0.015) : (Math.random() * 0.005 + 0.002);
+      this.pulse = Math.random() * Math.PI * 2;
+      this.pulseSpeed = Math.random() * 0.04 + 0.02;
+    }
+    update() {
+      this.y += this.speedY;
+      this.x += this.speedX + Math.sin(this.pulse) * 0.2;
+      this.pulse += this.pulseSpeed;
+      this.alpha -= this.fadeSpeed;
+      if (this.alpha <= 0 || this.y < -10 || this.x < -10 || this.x > width + 10) {
+        this.reset(Math.random() * width, height + 10, false);
+      }
+    }
+    draw() {
+      if (this.alpha <= 0) return;
+      ctx.save();
+      ctx.globalAlpha = Math.max(0, Math.min(1, this.alpha));
+      ctx.fillStyle = this.colorBase + this.alpha + ')';
+      ctx.shadowColor = '#d9a62e';
+      ctx.shadowBlur = this.isSparkle ? 10 : 4;
+
+      if (this.isSparkle) {
+        const r = this.size * 2.4;
+        ctx.beginPath();
+        ctx.moveTo(this.x, this.y - r);
+        ctx.quadraticCurveTo(this.x, this.y, this.x + r, this.y);
+        ctx.quadraticCurveTo(this.x, this.y, this.x, this.y + r);
+        ctx.quadraticCurveTo(this.x, this.y, this.x - r, this.y);
+        ctx.quadraticCurveTo(this.x, this.y, this.x, this.y - r);
+        ctx.closePath();
+        ctx.fill();
+      } else {
+        ctx.beginPath();
+        ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2);
+        ctx.fill();
+      }
+      ctx.restore();
+    }
+  }
+
+  const particleCount = 40;
+  const particles = Array.from({ length: particleCount }, () => new MagicParticle());
+
+  let lastSpawn = 0;
+  const handlePointer = (e) => {
+    const now = performance.now();
+    if (now - lastSpawn < 35) return;
+    lastSpawn = now;
+    const rect = hero.getBoundingClientRect();
+    const px = (e.clientX !== undefined ? e.clientX : (e.touches && e.touches[0]?.clientX)) - rect.left;
+    const py = (e.clientY !== undefined ? e.clientY : (e.touches && e.touches[0]?.clientY)) - rect.top;
+    if (px >= 0 && px <= width && py >= 0 && py <= height) {
+      for (let i = 0; i < 3; i++) {
+        particles.push(new MagicParticle(px + (Math.random() - 0.5) * 16, py + (Math.random() - 0.5) * 16, true));
+      }
+      if (particles.length > 70) particles.splice(0, particles.length - 70);
+    }
+  };
+
+  hero.addEventListener('mousemove', handlePointer, { passive: true });
+  hero.addEventListener('touchmove', handlePointer, { passive: true });
+
+  let isVisible = true;
+  if ('IntersectionObserver' in window) {
+    const observer = new IntersectionObserver(([entry]) => {
+      isVisible = entry.isIntersecting;
+    }, { threshold: 0.05 });
+    observer.observe(hero);
+  }
+
+  const animate = () => {
+    if (isVisible) {
+      ctx.clearRect(0, 0, width, height);
+      for (let i = 0; i < particles.length; i++) {
+        particles[i].update();
+        particles[i].draw();
+      }
+    }
+    requestAnimationFrame(animate);
+  };
+  requestAnimationFrame(animate);
+})();
+
 // Free Estimate Contact Form Modal
 const ensureEstimateModal = () => {
   let modal = document.getElementById('estimate-modal');
