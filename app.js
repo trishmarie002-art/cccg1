@@ -415,3 +415,34 @@ document.querySelector('[data-skip-main]')?.addEventListener('click', () => {
  cleanMapLinks();
  document.querySelectorAll('.leaflet-container').forEach(map => new MutationObserver(cleanMapLinks).observe(map, {childList:true,subtree:true}));
 })();
+
+// Rotate homepage gallery photographs; pause when hidden or motion is reduced.
+(() => {
+  const hero = document.querySelector('.hero-has-slides');
+  if (!hero) return;
+  const slides = Array.from(hero.querySelectorAll('.hero-slide'));
+  const motion = matchMedia('(prefers-reduced-motion: reduce)');
+  let active = 0;
+  let timer;
+  let visible = true;
+  const sync = () => {
+    clearInterval(timer);
+    if (motion.matches || document.hidden || !visible) return;
+    timer = setInterval(() => {
+      const next = (active + 1) % slides.length;
+      if (!slides[next].complete || !slides[next].naturalWidth) return;
+      slides[active].classList.remove('is-active');
+      slides[next].classList.add('is-active');
+      active = next;
+    }, 5500);
+  };
+  if ('IntersectionObserver' in window) {
+    new IntersectionObserver(([entry]) => {
+      visible = entry.isIntersecting;
+      sync();
+    }).observe(hero);
+  }
+  document.addEventListener('visibilitychange', sync);
+  motion.addEventListener('change', sync);
+  sync();
+})();
