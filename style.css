@@ -127,3 +127,9 @@ button.skip{border:0;font:inherit;cursor:pointer}main:focus{outline:none}@media(
 
 /* Homepage gallery slideshow shares the scroll parallax offset. */
 .hero-has-slides::before{display:none}.hero-slides{position:absolute;inset:-20% 0;z-index:0;pointer-events:none;transform:translate3d(0,var(--parallax-y,0px),0);will-change:transform}.hero-slide{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;opacity:0;transition:opacity 1.2s ease}.hero-slide.is-active{opacity:1}.hero-slides::after{content:"";position:absolute;inset:0;background:linear-gradient(90deg,rgba(3,14,9,.85),rgba(4,18,12,.56) 55%,rgba(5,22,14,.22))}@media(max-width:600px){.hero-slides::after{background:linear-gradient(90deg,rgba(3,14,9,.85),rgba(4,18,12,.5))}}@media(prefers-reduced-motion:reduce){.hero-slides{transform:none;will-change:auto}.hero-slide{transition:none}}
+
+/* Keep the estimate overlay below hCaptcha's body-level challenge. */
+.estimate-backdrop{position:fixed;inset:0;background:rgba(7,26,18,.8);backdrop-filter:blur(4px);z-index:1000}
+#estimate-modal{position:fixed;top:50%;left:50%;transform:translate(-50%,-50%);margin:0;z-index:1001;box-sizing:border-box}
+.form-sent{display:flex;align-items:center;gap:14px;padding:18px;background:#ecfdf3;border:1px solid #86d5a1;border-radius:8px;color:#166534;font-size:15px;line-height:1.5}
+.sent-check{display:flex;align-items:center;justify-content:center;width:38px;height:38px;flex-shrink:0;border-radius:50%;background:#16803c;color:white;font-size:25px;font-weight:bold}

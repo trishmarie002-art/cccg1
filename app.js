@@ -205,7 +205,13 @@ const ensureEstimateModal = () => {
   let modal = document.getElementById('estimate-modal');
   if (modal) return modal;
 
-  modal = document.createElement('dialog');
+  // Native modal dialogs occupy the browser top layer above hCaptcha's challenge.
+  // Use a regular overlay so the verification iframe can appear above it.
+  modal = document.createElement('div');
+  modal.hidden = true;
+  modal.setAttribute('role', 'dialog');
+  modal.setAttribute('aria-modal', 'true');
+  modal.setAttribute('tabindex', '-1');
   modal.id = 'estimate-modal';
   modal.setAttribute('aria-labelledby', 'estimate-modal-title');
   modal.innerHTML = `
@@ -262,6 +268,35 @@ const ensureEstimateModal = () => {
     </div>
   `;
 
+  const backdrop = document.createElement('div');
+  backdrop.className = 'estimate-backdrop';
+  backdrop.hidden = true;
+  document.body.appendChild(backdrop);
+  let previousFocus;
+  let previousOverflow;
+  modal.showModal = () => {
+    previousFocus = document.activeElement;
+    previousOverflow = document.body.style.overflow;
+    backdrop.hidden = false;
+    modal.hidden = false;
+    document.body.style.overflow = 'hidden';
+    modal.querySelector('.close-modal').focus();
+  };
+  modal.close = () => {
+    modal.hidden = true;
+    backdrop.hidden = true;
+    document.body.style.overflow = previousOverflow;
+    previousFocus?.focus();
+  };
+  backdrop.addEventListener('click', () => modal.close());
+  modal.addEventListener('keydown', event => {
+    if (event.key === 'Escape') modal.close();
+    if (event.key === 'Tab') {
+      const controls = [...modal.querySelectorAll('button, input:not([type="hidden"]), select, textarea, a[href], iframe')].filter(el => el.getClientRects().length);
+      if (event.shiftKey && event.target === controls[0]) {event.preventDefault(); controls.at(-1)?.focus();}
+      else if (!event.shiftKey && event.target === controls.at(-1)) {event.preventDefault(); controls[0]?.focus();}
+    }
+  });
   document.body.appendChild(modal);
   setupFormCaptcha();
 
@@ -430,6 +465,7 @@ document.addEventListener('submit', async event => {
   event.preventDefault();
   if (form.dataset.sending === 'true') return;
   const status = form.querySelector('[role="status"]');
+  status.classList.remove('form-sent');
   const button = form.querySelector('[type="submit"]');
   if (form.querySelector('[name="botcheck"]')?.checked) {
     status.textContent = 'Your request could not be submitted. Please reload the page.';
@@ -458,7 +494,8 @@ document.addEventListener('submit', async event => {
     });
     const result = await response.json();
     if (!response.ok || !result.success) throw new Error('Submission rejected');
-    status.textContent = 'Thank you! Your request was submitted successfully. Our team will follow up with you.';
+    status.innerHTML = '<span class="sent-check" aria-hidden="true">✓</span><span><strong>Message sent!</strong><br>Thank you. Our team will follow up with you.</span>';
+    status.classList.add('form-sent');
     form.reset();
   } catch (error) {
     status.textContent = 'We could not confirm your submission. Your details are still here. Please try again or call (727) 922-7630.';
