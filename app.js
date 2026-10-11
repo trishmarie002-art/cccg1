@@ -1,7 +1,7 @@
 const menu=document.querySelector('.menu-toggle');menu?.addEventListener('click',()=>{const open=document.querySelector('nav').classList.toggle('open');menu.setAttribute('aria-expanded',String(open));menu.setAttribute('aria-label',open?'Close navigation':'Open navigation')});
 const box=document.querySelector('#lightbox');document.querySelectorAll('.project').forEach(p=>p.addEventListener('click',()=>{box.querySelector('img').src=p.dataset.image;box.querySelector('img').alt=p.getAttribute('aria-label').replace('View ','');box.showModal()}));document.querySelectorAll('.review-screenshot a, .review-screenshot img').forEach(el=>el.addEventListener('click',e=>{e.preventDefault();const src=el.getAttribute('href')||el.getAttribute('src');if(box&&src){box.querySelector('img').src=src;box.querySelector('img').alt=el.getAttribute('alt')||'Customer Google Review';box.showModal()}}));box?.querySelector('button').addEventListener('click',()=>box.close());box?.addEventListener('click',e=>{if(e.target===box)box.close()});
 document.querySelectorAll('[data-filter]').forEach(b=>b.addEventListener('click',()=>{document.querySelectorAll('[data-filter]').forEach(x=>x.classList.toggle('active',x===b));document.querySelectorAll('[data-category]').forEach(p=>p.hidden=b.dataset.filter!=='All'&&p.dataset.category!==b.dataset.filter)}));
-document.querySelector('#estimate-form')?.addEventListener('submit',e=>{e.preventDefault();const data=new FormData(e.target);const body='Free estimate request — Coast to Coast Construction Group\n\n'+Array.from(data,([k,v])=>k+': '+v).join('\n');document.querySelector('#request-text').value=body;document.querySelector('#send-text').href='sms:+17279227630?body='+encodeURIComponent(body);document.querySelector('#request-summary').hidden=false;document.querySelector('#form-status').textContent='Your request is prepared. Send it by text below, or call the team.';document.querySelector('#request-summary').scrollIntoView({block:'center',behavior:matchMedia('(prefers-reduced-motion: reduce)').matches?'auto':'smooth'})});
+document.querySelector('#estimate-form')?.addEventListener('submit',e=>{e.preventDefault();const data=new FormData(e.target);const body='Free estimate request — Coast to Coast Construction Group\n\n'+Array.from(data,([k,v])=>k+': '+v).join('\n');document.querySelector('#request-text').value=body;document.querySelector('#send-text').href='sms:+17279227630?body='+encodeURIComponent(body);const emailBtn=document.querySelector('#send-email');if(emailBtn){emailBtn.href='mailto:Office@cccg-us.com?subject='+encodeURIComponent('Estimate Request — '+(data.get('Name')||'Customer'))+'&body='+encodeURIComponent(body);}document.querySelector('#request-summary').hidden=false;document.querySelector('#form-status').textContent='Your request is prepared. Send it by text or email below, or call our office.';document.querySelector('#request-summary').scrollIntoView({block:'center',behavior:matchMedia('(prefers-reduced-motion: reduce)').matches?'auto':'smooth'})});
 
 // Parallax scroll effect for hero sections
 (() => {
@@ -254,17 +254,19 @@ const ensureEstimateModal = () => {
           </label>
         </div>
         <div class="modal-actions">
-          <span class="modal-security">✓ 100% Family-Owned &bull; Licensed &amp; Insured in Florida</span>
+          <span class="modal-security">✓ Office: 140 Island Way #284, Clearwater · Lic: CGC1518966, CMC057196, CCC1330430, CUC12255160, NASCLA</span>
           <button class="button" type="submit">Submit Estimate Request <span>↗</span></button>
         </div>
       </form>
       <div id="modal-success" class="estimate-success" hidden>
         <div class="success-badge">✓</div>
         <h3>Estimate Request Received!</h3>
-        <p id="modal-success-message">Thank you! Our Clearwater team will review your project details and reach out shortly.</p>
+        <p id="modal-success-message">Thank you! Our Clearwater office team (140 Island Way #284) will review your project details and reach out shortly.</p>
         <div class="success-actions">
-          <a id="modal-sms-btn" class="button" href="#">Send as Text Message (SMS) <span>↗</span></a>
+          <a id="modal-sms-btn" class="button" href="#">Send by Text (SMS) <span>↗</span></a>
+          <a id="modal-email-btn" class="button" href="mailto:Office@cccg-us.com">Email Office@cccg-us.com <span>↗</span></a>
           <a class="button outline" href="tel:+17279227630" style="color:var(--green);border-color:var(--green)">Call (727) 922-7630</a>
+          <a class="button outline" href="https://www.facebook.com/profile.php?id=100064061083235" target="_blank" rel="noopener noreferrer" style="color:#1877f2;border-color:#1877f2">Facebook ↗</a>
           <button type="button" class="button close-success" style="background:#eae4d6;color:var(--green);border-color:#eae4d6">Done</button>
         </div>
       </div>
@@ -287,6 +289,7 @@ const ensureEstimateModal = () => {
   const successBox = modal.querySelector('#modal-success');
   const successMsg = modal.querySelector('#modal-success-message');
   const smsBtn = modal.querySelector('#modal-sms-btn');
+  const emailModalBtn = modal.querySelector('#modal-email-btn');
 
   form?.addEventListener('submit', (e) => {
     e.preventDefault();
@@ -303,9 +306,12 @@ const ensureEstimateModal = () => {
     if (smsBtn) {
       smsBtn.href = `sms:+17279227630?body=${encodeURIComponent(summaryText)}`;
     }
+    if (emailModalBtn) {
+      emailModalBtn.href = `mailto:Office@cccg-us.com?subject=${encodeURIComponent('Estimate Request — ' + name)}&body=${encodeURIComponent(summaryText)}`;
+    }
 
     if (successMsg) {
-      successMsg.textContent = `Thank you, ${name}! We have received your request for ${service}. Our Clearwater team will review it and contact you via ${pref.toLowerCase()} shortly.`;
+      successMsg.textContent = `Thank you, ${name}! We have received your request for ${service}. Our Clearwater office team (Mon–Fri 8AM–5PM) will review it and contact you via ${pref.toLowerCase()} shortly.`;
     }
 
     form.hidden = true;
