@@ -9,6 +9,12 @@ const app = express();
 const PORT = process.env.PORT || 3000;
 const HOST = '0.0.0.0';
 
+// Redirect index.html aliases to the same canonical URLs used by Vercel.
+app.use((req, res, next) => {
+ if (req.path.endsWith('/index.html')) return res.redirect(308, req.path.slice(0, -10) + (req.url.includes('?') ? req.url.slice(req.url.indexOf('?')) : ''));
+ next();
+});
+
 // Serve static files with clean URLs & directory indexing
 app.use(express.static(__dirname, {
   extensions: ['html'],
@@ -17,7 +23,7 @@ app.use(express.static(__dirname, {
 
 // Fallback to root index.html
 app.use((req, res) => {
-  res.status(404).sendFile('index.html', { root: __dirname });
+  res.status(404).sendFile('404.html', { root: __dirname });
 });
 
 app.listen(PORT, HOST, () => {

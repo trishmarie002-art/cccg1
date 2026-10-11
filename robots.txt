@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://cccg1-iw8h.vercel.app/sitemap.xml

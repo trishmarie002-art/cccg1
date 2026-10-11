@@ -1,0 +1,331 @@
+{
+  "cleanUrls": true,
+  "trailingSlash": true,
+  "redirects": [
+    {
+      "source": "/about/index.html",
+      "destination": "/about/",
+      "permanent": true
+    },
+    {
+      "source": "/blog/accessibility-focused-remodeling-in-florida-homes/index.html",
+      "destination": "/blog/accessibility-focused-remodeling-in-florida-homes/",
+      "permanent": true
+    },
+    {
+      "source": "/blog/adding-a-spa-to-a-new-pool-in-florida/index.html",
+      "destination": "/blog/adding-a-spa-to-a-new-pool-in-florida/",
+      "permanent": true
+    },
+    {
+      "source": "/blog/bathroom-remodeling-in-florida-water-management-first/index.html",
+      "destination": "/blog/bathroom-remodeling-in-florida-water-management-first/",
+      "permanent": true
+    },
+    {
+      "source": "/blog/building-a-construction-budget-in-tampa-bay/index.html",
+      "destination": "/blog/building-a-construction-budget-in-tampa-bay/",
+      "permanent": true
+    },
+    {
+      "source": "/blog/choosing-a-pool-builder-in-florida-questions-before-signing/index.html",
+      "destination": "/blog/choosing-a-pool-builder-in-florida-questions-before-signing/",
+      "permanent": true
+    },
+    {
+      "source": "/blog/coastal-construction-planning-in-pinellas-county/index.html",
+      "destination": "/blog/coastal-construction-planning-in-pinellas-county/",
+      "permanent": true
+    },
+    {
+      "source": "/blog/combining-a-home-remodel-and-pool-project-in-florida/index.html",
+      "destination": "/blog/combining-a-home-remodel-and-pool-project-in-florida/",
+      "permanent": true
+    },
+    {
+      "source": "/blog/commercial-renovation-planning-in-tampa-florida/index.html",
+      "destination": "/blog/commercial-renovation-planning-in-tampa-florida/",
+      "permanent": true
+    },
+    {
+      "source": "/blog/comparing-construction-proposals-in-florida/index.html",
+      "destination": "/blog/comparing-construction-proposals-in-florida/",
+      "permanent": true
+    },
+    {
+      "source": "/blog/concrete-and-fiberglass-pools-in-florida-comparing-the-fit/index.html",
+      "destination": "/blog/concrete-and-fiberglass-pools-in-florida-comparing-the-fit/",
+      "permanent": true
+    },
+    {
+      "source": "/blog/construction-access-on-tight-lots-in-dunedin/index.html",
+      "destination": "/blog/construction-access-on-tight-lots-in-dunedin/",
+      "permanent": true
+    },
+    {
+      "source": "/blog/construction-closeout-a-florida-homeowner-checklist/index.html",
+      "destination": "/blog/construction-closeout-a-florida-homeowner-checklist/",
+      "permanent": true
+    },
+    {
+      "source": "/blog/construction-planning-for-florida-condo-interiors/index.html",
+      "destination": "/blog/construction-planning-for-florida-condo-interiors/",
+      "permanent": true
+    },
+    {
+      "source": "/blog/family-friendly-pool-layouts-for-florida-homes/index.html",
+      "destination": "/blog/family-friendly-pool-layouts-for-florida-homes/",
+      "permanent": true
+    },
+    {
+      "source": "/blog/florida-garage-conversions-feasibility-before-finishes/index.html",
+      "destination": "/blog/florida-garage-conversions-feasibility-before-finishes/",
+      "permanent": true
+    },
+    {
+      "source": "/blog/florida-outdoor-kitchens-utilities-before-appliances/index.html",
+      "destination": "/blog/florida-outdoor-kitchens-utilities-before-appliances/",
+      "permanent": true
+    },
+    {
+      "source": "/blog/general-contracting/index.html",
+      "destination": "/blog/general-contracting/",
+      "permanent": true
+    },
+    {
+      "source": "/blog/heating-a-florida-pool-comparing-your-options/index.html",
+      "destination": "/blog/heating-a-florida-pool-comparing-your-options/",
+      "permanent": true
+    },
+    {
+      "source": "/blog/home-additions-in-largo-planning-the-connection/index.html",
+      "destination": "/blog/home-additions-in-largo-planning-the-connection/",
+      "permanent": true
+    },
+    {
+      "source": "/blog/how-to-choose-a-general-contractor-in-florida/index.html",
+      "destination": "/blog/how-to-choose-a-general-contractor-in-florida/",
+      "permanent": true
+    },
+    {
+      "source": "/blog/humidity-conscious-material-choices-for-florida-remodels/index.html",
+      "destination": "/blog/humidity-conscious-material-choices-for-florida-remodels/",
+      "permanent": true
+    },
+    {
+      "source": "/blog/index.html",
+      "destination": "/blog/",
+      "permanent": true
+    },
+    {
+      "source": "/blog/kitchen-remodeling-in-st-petersburg-layout-before-finishes/index.html",
+      "destination": "/blog/kitchen-remodeling-in-st-petersburg-layout-before-finishes/",
+      "permanent": true
+    },
+    {
+      "source": "/blog/older-home-renovations-in-safety-harbor/index.html",
+      "destination": "/blog/older-home-renovations-in-safety-harbor/",
+      "permanent": true
+    },
+    {
+      "source": "/blog/planning-a-custom-pool-in-clearwater-florida/index.html",
+      "destination": "/blog/planning-a-custom-pool-in-clearwater-florida/",
+      "permanent": true
+    },
+    {
+      "source": "/blog/planning-a-home-renovation-in-clearwater-florida/index.html",
+      "destination": "/blog/planning-a-home-renovation-in-clearwater-florida/",
+      "permanent": true
+    },
+    {
+      "source": "/blog/planning-construction-around-florida-rainy-weather/index.html",
+      "destination": "/blog/planning-construction-around-florida-rainy-weather/",
+      "permanent": true
+    },
+    {
+      "source": "/blog/planning-pool-barriers-and-access-in-florida/index.html",
+      "destination": "/blog/planning-pool-barriers-and-access-in-florida/",
+      "permanent": true
+    },
+    {
+      "source": "/blog/pool-and-screen-enclosure-planning-in-florida/index.html",
+      "destination": "/blog/pool-and-screen-enclosure-planning-in-florida/",
+      "permanent": true
+    },
+    {
+      "source": "/blog/pool-construction/index.html",
+      "destination": "/blog/pool-construction/",
+      "permanent": true
+    },
+    {
+      "source": "/blog/pool-construction-budgets-in-tampa-bay-what-to-include/index.html",
+      "destination": "/blog/pool-construction-budgets-in-tampa-bay-what-to-include/",
+      "permanent": true
+    },
+    {
+      "source": "/blog/pool-construction-on-waterfront-florida-properties/index.html",
+      "destination": "/blog/pool-construction-on-waterfront-florida-properties/",
+      "permanent": true
+    },
+    {
+      "source": "/blog/pool-construction-timelines-in-florida-understanding-the-stages/index.html",
+      "destination": "/blog/pool-construction-timelines-in-florida-understanding-the-stages/",
+      "permanent": true
+    },
+    {
+      "source": "/blog/pool-decking-in-florida-comfort-and-maintenance/index.html",
+      "destination": "/blog/pool-decking-in-florida-comfort-and-maintenance/",
+      "permanent": true
+    },
+    {
+      "source": "/blog/pool-drainage-and-deck-grading-in-tampa-bay/index.html",
+      "destination": "/blog/pool-drainage-and-deck-grading-in-tampa-bay/",
+      "permanent": true
+    },
+    {
+      "source": "/blog/pool-equipment-selection-in-florida-start-with-the-design/index.html",
+      "destination": "/blog/pool-equipment-selection-in-florida-start-with-the-design/",
+      "permanent": true
+    },
+    {
+      "source": "/blog/pool-excavation-access-in-largo-and-pinellas-county/index.html",
+      "destination": "/blog/pool-excavation-access-in-largo-and-pinellas-county/",
+      "permanent": true
+    },
+    {
+      "source": "/blog/pool-lighting-design-for-florida-backyards/index.html",
+      "destination": "/blog/pool-lighting-design-for-florida-backyards/",
+      "permanent": true
+    },
+    {
+      "source": "/blog/pool-permitting-in-clearwater-preparing-the-application/index.html",
+      "destination": "/blog/pool-permitting-in-clearwater-preparing-the-application/",
+      "permanent": true
+    },
+    {
+      "source": "/blog/pool-renovation-or-new-construction-in-florida/index.html",
+      "destination": "/blog/pool-renovation-or-new-construction-in-florida/",
+      "permanent": true
+    },
+    {
+      "source": "/blog/pool-startup-and-handover-in-florida-what-to-expect/index.html",
+      "destination": "/blog/pool-startup-and-handover-in-florida-what-to-expect/",
+      "permanent": true
+    },
+    {
+      "source": "/blog/rectangular-or-freeform-pool-a-florida-design-guide/index.html",
+      "destination": "/blog/rectangular-or-freeform-pool-a-florida-design-guide/",
+      "permanent": true
+    },
+    {
+      "source": "/blog/remodel-or-rebuild-a-florida-homeowner-decision-guide/index.html",
+      "destination": "/blog/remodel-or-rebuild-a-florida-homeowner-decision-guide/",
+      "permanent": true
+    },
+    {
+      "source": "/blog/roof-replacement-planning-in-clearwater/index.html",
+      "destination": "/blog/roof-replacement-planning-in-clearwater/",
+      "permanent": true
+    },
+    {
+      "source": "/blog/saltwater-pools-in-florida-what-the-system-actually-does/index.html",
+      "destination": "/blog/saltwater-pools-in-florida-what-the-system-actually-does/",
+      "permanent": true
+    },
+    {
+      "source": "/blog/site-preparation-for-new-construction-in-florida/index.html",
+      "destination": "/blog/site-preparation-for-new-construction-in-florida/",
+      "permanent": true
+    },
+    {
+      "source": "/blog/small-backyard-pool-design-in-st-petersburg/index.html",
+      "destination": "/blog/small-backyard-pool-design-in-st-petersburg/",
+      "permanent": true
+    },
+    {
+      "source": "/blog/storm-drainage-planning-for-florida-homes/index.html",
+      "destination": "/blog/storm-drainage-planning-for-florida-homes/",
+      "permanent": true
+    },
+    {
+      "source": "/blog/sun-shelves-in-florida-pools-size-shade-and-use/index.html",
+      "destination": "/blog/sun-shelves-in-florida-pools-size-shade-and-use/",
+      "permanent": true
+    },
+    {
+      "source": "/blog/travertine-pool-decks-in-tampa-bay-questions-to-ask/index.html",
+      "destination": "/blog/travertine-pool-decks-in-tampa-bay-questions-to-ask/",
+      "permanent": true
+    },
+    {
+      "source": "/blog/understanding-construction-change-orders-in-florida/index.html",
+      "destination": "/blog/understanding-construction-change-orders-in-florida/",
+      "permanent": true
+    },
+    {
+      "source": "/blog/variable-speed-pool-pumps-for-florida-homeowners/index.html",
+      "destination": "/blog/variable-speed-pool-pumps-for-florida-homeowners/",
+      "permanent": true
+    },
+    {
+      "source": "/blog/whole-home-remodeling-in-palm-harbor-work-sequencing/index.html",
+      "destination": "/blog/whole-home-remodeling-in-palm-harbor-work-sequencing/",
+      "permanent": true
+    },
+    {
+      "source": "/contact/index.html",
+      "destination": "/contact/",
+      "permanent": true
+    },
+    {
+      "source": "/faq/index.html",
+      "destination": "/faq/",
+      "permanent": true
+    },
+    {
+      "source": "/free-estimate/index.html",
+      "destination": "/free-estimate/",
+      "permanent": true
+    },
+    {
+      "source": "/gallery/index.html",
+      "destination": "/gallery/",
+      "permanent": true
+    },
+    {
+      "source": "/index.html",
+      "destination": "/",
+      "permanent": true
+    },
+    {
+      "source": "/pool-construction/index.html",
+      "destination": "/pool-construction/",
+      "permanent": true
+    },
+    {
+      "source": "/reviews/index.html",
+      "destination": "/reviews/",
+      "permanent": true
+    },
+    {
+      "source": "/roofing/index.html",
+      "destination": "/roofing/",
+      "permanent": true
+    },
+    {
+      "source": "/services/index.html",
+      "destination": "/services/",
+      "permanent": true
+    },
+    {
+      "source": "/storm-drainage/index.html",
+      "destination": "/storm-drainage/",
+      "permanent": true
+    },
+    {
+      "source": "/blogs/",
+      "destination": "/blog/",
+      "permanent": true
+    }
+  ]
+}

@@ -255,15 +255,15 @@ const ensureEstimateModal = () => {
         </div>
         <div class="modal-actions">
           <span class="modal-security">✓ Office: 140 Island Way #284, Clearwater · Lic: CGC1518966, CMC057196, CCC1330430, CUC12255160, NASCLA</span>
-          <button class="button" type="submit">Submit Estimate Request <span>↗</span></button>
+          <button class="button" type="submit">Prepare My Request <span>↗</span></button>
         </div>
       </form>
       <div id="modal-success" class="estimate-success" hidden>
         <div class="success-badge">✓</div>
-        <h3>Estimate Request Received!</h3>
-        <p id="modal-success-message">Thank you! Our Clearwater office team (140 Island Way #284) will review your project details and reach out shortly.</p>
+        <h3>Your Estimate Request Is Ready</h3>
+        <p id="modal-success-message">Send your prepared request by text or email below to deliver it to our Clearwater office.</p>
         <div class="success-actions">
-          <a id="modal-sms-btn" class="button" href="#">Send by Text (SMS) <span>↗</span></a>
+          <a id="modal-sms-btn" class="button" href="sms:+17279227630">Send by Text (SMS) <span>↗</span></a>
           <a id="modal-email-btn" class="button" href="mailto:Office@cccg-us.com">Email Office@cccg-us.com <span>↗</span></a>
           <a class="button outline" href="tel:+17279227630" style="color:var(--green);border-color:var(--green)">Call (727) 922-7630</a>
           <a class="button outline" href="https://www.facebook.com/profile.php?id=100064061083235" target="_blank" rel="noopener noreferrer" style="color:#1877f2;border-color:#1877f2">Facebook ↗</a>
@@ -311,7 +311,7 @@ const ensureEstimateModal = () => {
     }
 
     if (successMsg) {
-      successMsg.textContent = `Thank you, ${name}! We have received your request for ${service}. Our Clearwater office team (Mon–Fri 8AM–5PM) will review it and contact you via ${pref.toLowerCase()} shortly.`;
+      successMsg.textContent = `${name}, your ${service} request is prepared. Choose Send by Text or Email below, then send it from your app to deliver it to our Clearwater office. Office hours: Mon–Fri 8AM–5PM.`;
     }
 
     form.hidden = true;
@@ -399,3 +399,12 @@ document.addEventListener('click', (e) => {
     }
   });
 })();
+
+// Skip navigation without adding a fragment to the current URL.
+document.querySelector('[data-skip-main]')?.addEventListener('click', () => {
+ const main = document.querySelector('main');
+ if (!main) return;
+ main.setAttribute('tabindex', '-1');
+ main.focus({preventScroll:true});
+ main.scrollIntoView({block:'start',behavior:'auto'});
+});
