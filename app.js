@@ -408,3 +408,10 @@ document.querySelector('[data-skip-main]')?.addEventListener('click', () => {
  main.focus({preventScroll:true});
  main.scrollIntoView({block:'start',behavior:'auto'});
 });
+
+// Third-party map controls also receive fragment-free URLs.
+(() => {
+ const cleanMapLinks = () => document.querySelectorAll('.leaflet-container a[href^="#"]').forEach(link => link.setAttribute('href', window.location.pathname));
+ cleanMapLinks();
+ document.querySelectorAll('.leaflet-container').forEach(map => new MutationObserver(cleanMapLinks).observe(map, {childList:true,subtree:true}));
+})();
