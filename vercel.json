@@ -326,6 +326,111 @@
       "source": "/blogs/",
       "destination": "/blog/",
       "permanent": true
+    },
+    {
+      "source": "/service-areas/index.html",
+      "destination": "/service-areas/",
+      "permanent": true
+    },
+    {
+      "source": "/service-areas/clearwater-beach/index.html",
+      "destination": "/service-areas/clearwater-beach/",
+      "permanent": true
+    },
+    {
+      "source": "/service-areas/dunedin/index.html",
+      "destination": "/service-areas/dunedin/",
+      "permanent": true
+    },
+    {
+      "source": "/service-areas/safety-harbor/index.html",
+      "destination": "/service-areas/safety-harbor/",
+      "permanent": true
+    },
+    {
+      "source": "/service-areas/largo/index.html",
+      "destination": "/service-areas/largo/",
+      "permanent": true
+    },
+    {
+      "source": "/service-areas/palm-harbor/index.html",
+      "destination": "/service-areas/palm-harbor/",
+      "permanent": true
+    },
+    {
+      "source": "/service-areas/oldsmar/index.html",
+      "destination": "/service-areas/oldsmar/",
+      "permanent": true
+    },
+    {
+      "source": "/service-areas/tarpon-springs/index.html",
+      "destination": "/service-areas/tarpon-springs/",
+      "permanent": true
+    },
+    {
+      "source": "/service-areas/belleair/index.html",
+      "destination": "/service-areas/belleair/",
+      "permanent": true
+    },
+    {
+      "source": "/service-areas/belleair-bluffs/index.html",
+      "destination": "/service-areas/belleair-bluffs/",
+      "permanent": true
+    },
+    {
+      "source": "/service-areas/belleair-beach/index.html",
+      "destination": "/service-areas/belleair-beach/",
+      "permanent": true
+    },
+    {
+      "source": "/service-areas/indian-rocks-beach/index.html",
+      "destination": "/service-areas/indian-rocks-beach/",
+      "permanent": true
+    },
+    {
+      "source": "/service-areas/indian-shores/index.html",
+      "destination": "/service-areas/indian-shores/",
+      "permanent": true
+    },
+    {
+      "source": "/service-areas/seminole/index.html",
+      "destination": "/service-areas/seminole/",
+      "permanent": true
+    },
+    {
+      "source": "/service-areas/pinellas-park/index.html",
+      "destination": "/service-areas/pinellas-park/",
+      "permanent": true
+    },
+    {
+      "source": "/service-areas/st-petersburg/index.html",
+      "destination": "/service-areas/st-petersburg/",
+      "permanent": true
+    },
+    {
+      "source": "/service-areas/madeira-beach/index.html",
+      "destination": "/service-areas/madeira-beach/",
+      "permanent": true
+    },
+    {
+      "source": "/service-areas/north-redington-beach/index.html",
+      "destination": "/service-areas/north-redington-beach/",
+      "permanent": true
+    },
+    {
+      "source": "/service-areas/redington-beach/index.html",
+      "destination": "/service-areas/redington-beach/",
+      "permanent": true
+    },
+    {
+      "source": "/service-areas/redington-shores/index.html",
+      "destination": "/service-areas/redington-shores/",
+      "permanent": true
+    },
+    {
+      "source": "/service-areas/treasure-island/index.html",
+      "destination": "/service-areas/treasure-island/",
+      "permanent": true
     }
   ]
 }
