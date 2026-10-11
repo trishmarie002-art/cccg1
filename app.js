@@ -1,7 +1,6 @@
 const menu=document.querySelector('.menu-toggle');menu?.addEventListener('click',()=>{const open=document.querySelector('nav').classList.toggle('open');menu.setAttribute('aria-expanded',String(open));menu.setAttribute('aria-label',open?'Close navigation':'Open navigation')});
 const box=document.querySelector('#lightbox');document.querySelectorAll('.project').forEach(p=>p.addEventListener('click',()=>{box.querySelector('img').src=p.dataset.image;box.querySelector('img').alt=p.getAttribute('aria-label').replace('View ','');box.showModal()}));document.querySelectorAll('.review-screenshot a, .review-screenshot img').forEach(el=>el.addEventListener('click',e=>{e.preventDefault();const src=el.getAttribute('href')||el.getAttribute('src');if(box&&src){box.querySelector('img').src=src;box.querySelector('img').alt=el.getAttribute('alt')||'Customer Google Review';box.showModal()}}));box?.querySelector('button').addEventListener('click',()=>box.close());box?.addEventListener('click',e=>{if(e.target===box)box.close()});
 document.querySelectorAll('[data-filter]').forEach(b=>b.addEventListener('click',()=>{document.querySelectorAll('[data-filter]').forEach(x=>x.classList.toggle('active',x===b));document.querySelectorAll('[data-category]').forEach(p=>p.hidden=b.dataset.filter!=='All'&&p.dataset.category!==b.dataset.filter)}));
-document.querySelector('#estimate-form')?.addEventListener('submit',e=>{e.preventDefault();const data=new FormData(e.target);const body='Free estimate request — Coast to Coast Construction Group\n\n'+Array.from(data,([k,v])=>k+': '+v).join('\n');document.querySelector('#request-text').value=body;document.querySelector('#send-text').href='sms:+17279227630?body='+encodeURIComponent(body);const emailBtn=document.querySelector('#send-email');if(emailBtn){emailBtn.href='mailto:Office@cccg-us.com?subject='+encodeURIComponent('Estimate Request — '+(data.get('Name')||'Customer'))+'&body='+encodeURIComponent(body);}document.querySelector('#request-summary').hidden=false;document.querySelector('#form-status').textContent='Your request is prepared. Send it by text or email below, or call our office.';document.querySelector('#request-summary').scrollIntoView({block:'center',behavior:matchMedia('(prefers-reduced-motion: reduce)').matches?'auto':'smooth'})});
 
 // Parallax scroll effect for hero sections
 (() => {
@@ -217,16 +216,16 @@ const ensureEstimateModal = () => {
       <button class="close-modal" type="button" aria-label="Close estimate form">×</button>
     </div>
     <div class="modal-body">
-      <form id="modal-estimate-form" class="modal-form">
+      <form id="modal-estimate-form" class="modal-form" action="https://api.web3forms.com/submit" method="POST" data-web3form><input type="hidden" name="access_key" value="12c15011-d3fa-4326-9c7c-c68cd90f36d3"><input type="hidden" name="subject" value="New website estimate request — Coast to Coast"><input type="checkbox" name="botcheck" style="display:none" tabindex="-1" aria-hidden="true">
         <div class="form-grid">
           <label>Full Name *
-            <input name="Name" required autocomplete="name" placeholder="Your name">
+            <input name="name" required autocomplete="name" placeholder="Your name">
           </label>
           <label>Phone Number *
             <input name="Phone" required type="tel" autocomplete="tel" placeholder="(727) 922-7630">
           </label>
           <label>Email Address *
-            <input name="Email" required type="email" autocomplete="email" placeholder="your@email.com">
+            <input name="email" required type="email" autocomplete="email" placeholder="your@email.com">
           </label>
           <label>Service Needed *
             <select name="Service" required>
@@ -250,26 +249,15 @@ const ensureEstimateModal = () => {
             </select>
           </label>
           <label class="wide">Project Details & Location *
-            <textarea name="Project" rows="4" required placeholder="Tell us about your project scope, location in the Tampa Bay area, timeline, or any specific questions..."></textarea>
+            <textarea name="message" rows="4" required placeholder="Tell us about your project scope, location in the Tampa Bay area, timeline, or any specific questions..."></textarea>
           </label>
         </div>
         <div class="modal-actions">
           <span class="modal-security">✓ Office: 140 Island Way #284, Clearwater · Lic: CGC1518966, CMC057196, CCC1330430, CUC12255160, NASCLA</span>
-          <button class="button" type="submit">Prepare My Request <span>↗</span></button>
+          <button class="button" type="submit">Send My Request <span>↗</span></button>
         </div>
+        <p class="web3-status" role="status" aria-live="polite"></p>
       </form>
-      <div id="modal-success" class="estimate-success" hidden>
-        <div class="success-badge">✓</div>
-        <h3>Your Estimate Request Is Ready</h3>
-        <p id="modal-success-message">Send your prepared request by text or email below to deliver it to our Clearwater office.</p>
-        <div class="success-actions">
-          <a id="modal-sms-btn" class="button" href="sms:+17279227630">Send by Text (SMS) <span>↗</span></a>
-          <a id="modal-email-btn" class="button" href="mailto:Office@cccg-us.com">Email Office@cccg-us.com <span>↗</span></a>
-          <a class="button outline" href="tel:+17279227630" style="color:var(--green);border-color:var(--green)">Call (727) 922-7630</a>
-          <a class="button outline" href="https://www.facebook.com/profile.php?id=100064061083235" target="_blank" rel="noopener noreferrer" style="color:#1877f2;border-color:#1877f2">Facebook ↗</a>
-          <button type="button" class="button close-success" style="background:#eae4d6;color:var(--green);border-color:#eae4d6">Done</button>
-        </div>
-      </div>
     </div>
   `;
 
@@ -285,53 +273,12 @@ const ensureEstimateModal = () => {
     if (e.target === modal) modal.close();
   });
 
-  const form = modal.querySelector('#modal-estimate-form');
-  const successBox = modal.querySelector('#modal-success');
-  const successMsg = modal.querySelector('#modal-success-message');
-  const smsBtn = modal.querySelector('#modal-sms-btn');
-  const emailModalBtn = modal.querySelector('#modal-email-btn');
-
-  form?.addEventListener('submit', (e) => {
-    e.preventDefault();
-    const data = new FormData(form);
-    const name = data.get('Name') || 'there';
-    const service = data.get('Service') || 'your project';
-    const pref = data.get('Contact preference') || 'Phone';
-    const phone = data.get('Phone') || '';
-    const email = data.get('Email') || '';
-    const project = data.get('Project') || '';
-
-    const summaryText = `Free estimate request — Coast to Coast Construction Group\n\nName: ${name}\nPhone: ${phone}\nEmail: ${email}\nService: ${service}\nPreference: ${pref}\nDetails: ${project}`;
-
-    if (smsBtn) {
-      smsBtn.href = `sms:+17279227630?body=${encodeURIComponent(summaryText)}`;
-    }
-    if (emailModalBtn) {
-      emailModalBtn.href = `mailto:Office@cccg-us.com?subject=${encodeURIComponent('Estimate Request — ' + name)}&body=${encodeURIComponent(summaryText)}`;
-    }
-
-    if (successMsg) {
-      successMsg.textContent = `${name}, your ${service} request is prepared. Choose Send by Text or Email below, then send it from your app to deliver it to our Clearwater office. Office hours: Mon–Fri 8AM–5PM.`;
-    }
-
-    form.hidden = true;
-    successBox.hidden = false;
-  });
-
   return modal;
 };
 
 const openEstimateModal = (initialService = '') => {
   const modal = ensureEstimateModal();
   const form = modal.querySelector('#modal-estimate-form');
-  const successBox = modal.querySelector('#modal-success');
-
-  if (successBox && !successBox.hidden) {
-    form?.reset();
-    form.hidden = false;
-    successBox.hidden = true;
-  }
-
   if (initialService && form) {
     const serviceSelect = form.querySelector('select[name="Service"]');
     if (serviceSelect) {
@@ -446,3 +393,38 @@ document.querySelector('[data-skip-main]')?.addEventListener('click', () => {
   motion.addEventListener('change', sync);
   sync();
 })();
+
+// All contact forms, including the dynamically created estimate dialog.
+document.addEventListener('submit', async event => {
+  const form = event.target;
+  if (!form.matches('form[data-web3form]')) return;
+  event.preventDefault();
+  if (form.dataset.sending === 'true') return;
+  const status = form.querySelector('[role="status"]');
+  const button = form.querySelector('[type="submit"]');
+  const original = button.innerHTML;
+  form.dataset.sending = 'true';
+  button.disabled = true;
+  button.textContent = 'Sending…';
+  status.textContent = 'Sending your request…';
+  try {
+    const payload = Object.fromEntries(new FormData(form));
+    payload.page = window.location.href;
+    const response = await fetch(form.action, {
+      method: 'POST',
+      headers: {'Content-Type': 'application/json', Accept: 'application/json'},
+      body: JSON.stringify(payload),
+      signal: AbortSignal.timeout(20000)
+    });
+    const result = await response.json();
+    if (!response.ok || !result.success) throw new Error('Submission rejected');
+    status.textContent = 'Thank you! Your request was submitted successfully. Our team will follow up with you.';
+    form.reset();
+  } catch (error) {
+    status.textContent = 'We could not confirm your submission. Your details are still here. Please try again or call (727) 922-7630.';
+  } finally {
+    form.dataset.sending = 'false';
+    button.disabled = false;
+    button.innerHTML = original;
+  }
+});
