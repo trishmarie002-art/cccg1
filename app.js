@@ -252,6 +252,7 @@ const ensureEstimateModal = () => {
             <textarea name="message" rows="4" required placeholder="Tell us about your project scope, location in the Tampa Bay area, timeline, or any specific questions..."></textarea>
           </label>
         </div>
+        <div class="form-captcha"></div>
         <div class="modal-actions">
           <span class="modal-security">✓ Office: 140 Island Way #284, Clearwater · Lic: CGC1518966, CMC057196, CCC1330430, CUC12255160, NASCLA</span>
           <button class="button" type="submit">Send My Request <span>↗</span></button>
@@ -262,6 +263,7 @@ const ensureEstimateModal = () => {
   `;
 
   document.body.appendChild(modal);
+  setupFormCaptcha();
 
   const closeBtn = modal.querySelector('.close-modal');
   closeBtn?.addEventListener('click', () => modal.close());
@@ -394,6 +396,33 @@ document.querySelector('[data-skip-main]')?.addEventListener('click', () => {
   sync();
 })();
 
+// Render Web3Forms-compatible hCaptcha for page forms and dynamic dialogs.
+function setupFormCaptcha() {
+  const containers = document.querySelectorAll('.form-captcha');
+  if (!containers.length) return;
+  if (!window.hcaptcha) {
+    if (!document.getElementById('form-captcha-script')) {
+      window.onFormCaptchaReady = setupFormCaptcha;
+      const script = document.createElement('script');
+      script.id = 'form-captcha-script';
+      script.src = 'https://js.hcaptcha.com/1/api.js?onload=onFormCaptchaReady&render=explicit&recaptchacompat=off';
+      script.async = true;
+      script.onerror = () => document.querySelectorAll('form[data-web3form] [role="status"]').forEach(status => {
+        status.textContent = 'Bot verification could not load. Please reload or call (727) 922-7630.';
+      });
+      document.head.appendChild(script);
+    }
+    return;
+  }
+  containers.forEach(container => {
+    if (container.dataset.widget !== undefined) return;
+    container.dataset.widget = String(window.hcaptcha.render(container, {
+      sitekey: '50b2fe65-b00b-4b9e-ad62-3ba471098be2', size: 'compact'
+    }));
+  });
+}
+setupFormCaptcha();
+
 // All contact forms, including the dynamically created estimate dialog.
 document.addEventListener('submit', async event => {
   const form = event.target;
@@ -402,6 +431,16 @@ document.addEventListener('submit', async event => {
   if (form.dataset.sending === 'true') return;
   const status = form.querySelector('[role="status"]');
   const button = form.querySelector('[type="submit"]');
+  if (form.querySelector('[name="botcheck"]')?.checked) {
+    status.textContent = 'Your request could not be submitted. Please reload the page.';
+    return;
+  }
+  const widget = form.querySelector('.form-captcha')?.dataset.widget;
+  const token = widget !== undefined && window.hcaptcha ? window.hcaptcha.getResponse(widget) : '';
+  if (!token) {
+    status.textContent = 'Please complete the bot verification before sending your request.';
+    return;
+  }
   const original = button.innerHTML;
   form.dataset.sending = 'true';
   button.disabled = true;
@@ -410,6 +449,7 @@ document.addEventListener('submit', async event => {
   try {
     const payload = Object.fromEntries(new FormData(form));
     payload.page = window.location.href;
+    payload['h-captcha-response'] = token;
     const response = await fetch(form.action, {
       method: 'POST',
       headers: {'Content-Type': 'application/json', Accept: 'application/json'},
@@ -423,6 +463,7 @@ document.addEventListener('submit', async event => {
   } catch (error) {
     status.textContent = 'We could not confirm your submission. Your details are still here. Please try again or call (727) 922-7630.';
   } finally {
+    if (window.hcaptcha && widget !== undefined) window.hcaptcha.reset(widget);
     form.dataset.sending = 'false';
     button.disabled = false;
     button.innerHTML = original;
