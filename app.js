@@ -228,7 +228,7 @@ const ensureEstimateModal = () => {
             <input name="name" required autocomplete="name" placeholder="Your name">
           </label>
           <label>Phone Number *
-            <input name="Phone" required type="tel" autocomplete="tel" placeholder="(727) 922-7630">
+            <input name="Phone" required type="tel" autocomplete="tel" placeholder="(727) 455-0226">
           </label>
           <label>Email Address *
             <input name="email" required type="email" autocomplete="email" placeholder="your@email.com">
@@ -260,7 +260,7 @@ const ensureEstimateModal = () => {
         </div>
         <div class="form-captcha"></div>
         <div class="modal-actions">
-          <span class="modal-security">✓ Office: 140 Island Way #284, Clearwater · Lic: CGC1518966, CMC057196, CCC1330430, CUC12255160, NASCLA</span>
+          <span class="modal-security">✓ Mailing address: 140 Island Way #284, Clearwater · Lic: CGC1518966, CMC057196, CCC1330430, CPC1461238, CUC1225160, NASCLA</span>
           <button class="button" type="submit">Send My Request <span>↗</span></button>
         </div>
         <p class="web3-status" role="status" aria-live="polite"></p>
@@ -354,7 +354,7 @@ document.addEventListener('click', (e) => {
   bar.className = 'mobile-contact-bar';
   bar.setAttribute('role', 'group');
   bar.setAttribute('aria-label', 'Contact Coast to Coast');
-  bar.innerHTML = '<a class="contact-call" href="tel:+17279227630" aria-label="Call Coast to Coast at (727) 922-7630"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M7 3H4a1 1 0 0 0-1 1c0 9.4 7.6 17 17 17a1 1 0 0 0 1-1v-3l-5-2-2 2a15 15 0 0 1-7-7l2-2-2-5Z"/></svg>Call Us</a><a class="contact-text" href="sms:+17279227630" aria-label="Text Coast to Coast at (727) 922-7630"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 4h16v12H9l-5 4V4Z"/><path d="M8 8h8M8 12h5"/></svg>Text Us</a>';
+  bar.innerHTML = '<a class="contact-call" href="tel:+17274550226" aria-label="Call Coast to Coast at (727) 455-0226"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M7 3H4a1 1 0 0 0-1 1c0 9.4 7.6 17 17 17a1 1 0 0 0 1-1v-3l-5-2-2 2a15 15 0 0 1-7-7l2-2-2-5Z"/></svg>Call Us</a><a class="contact-text" href="sms:+17274550226" aria-label="Text Coast to Coast at (727) 455-0226"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 4h16v12H9l-5 4V4Z"/><path d="M8 8h8M8 12h5"/></svg>Text Us</a>';
   document.body.appendChild(bar);
   const motion = window.matchMedia('(prefers-reduced-motion: reduce)');
   if (motion.matches || !('IntersectionObserver' in window)) return;
@@ -443,7 +443,7 @@ function setupFormCaptcha() {
       script.src = 'https://js.hcaptcha.com/1/api.js?onload=onFormCaptchaReady&render=explicit&recaptchacompat=off';
       script.async = true;
       script.onerror = () => document.querySelectorAll('form[data-web3form] [role="status"]').forEach(status => {
-        status.textContent = 'Bot verification could not load. Please reload or call (727) 922-7630.';
+        status.textContent = 'Bot verification could not load. Please reload or call (727) 455-0226.';
       });
       document.head.appendChild(script);
     }
@@ -498,7 +498,7 @@ document.addEventListener('submit', async event => {
     status.classList.add('form-sent');
     form.reset();
   } catch (error) {
-    status.textContent = 'We could not confirm your submission. Your details are still here. Please try again or call (727) 922-7630.';
+    status.textContent = 'We could not confirm your submission. Your details are still here. Please try again or call (727) 455-0226.';
   } finally {
     if (window.hcaptcha && widget !== undefined) window.hcaptcha.reset(widget);
     form.dataset.sending = 'false';
